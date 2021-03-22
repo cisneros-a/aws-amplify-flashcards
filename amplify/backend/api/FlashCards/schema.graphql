@@ -1,0 +1,21 @@
+type Cards @model @auth(rules: [{allow: public}]) @key(name: "byStacks", fields: ["stacksID"]) {
+  id: ID!
+  stacksID: ID
+  question: String
+  answer: String
+}
+
+type Stacks @model @key(name: "byUser", fields: ["userID"]) @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  userID: ID
+  Cards: [Cards] @connection(keyName: "byStacks", fields: ["id"])
+}
+
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  username: String!
+  password: String!
+  Stacks: [Stacks] @connection(keyName: "byUser", fields: ["id"])
+}
+ 
