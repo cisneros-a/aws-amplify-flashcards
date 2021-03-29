@@ -2,10 +2,6 @@ import "./App.css";
 import { useEffect } from "react";
 import { DataStore } from "@aws-amplify/datastore";
 import { User, Stacks } from "./models";
-import Amplify, { API, graphqlOperation } from "aws-amplify";
-import awsconfig from "./aws-exports";
-
-Amplify.configure(awsconfig);
 
 function App() {
   let addUser = async () => {
@@ -20,6 +16,7 @@ function App() {
   };
 
   //original userID: 148ee1c0-b57b-4c37-8ae8-394982f6ef56
+  //secondary userID: 7f0e7347-7026-4dba-8d05-69b3be2521cb
   let addStack = async () => {
     const stack = {
       title: window.prompt("title"),
@@ -33,7 +30,9 @@ function App() {
 
   useEffect(() => {
     const func = async () => {
-      const models = await DataStore.query(Stacks);
+      const models = await DataStore.query(Stacks, (s) =>
+        s.userID("eq", "148ee1c0-b57b-4c37-8ae8-394982f6ef56")
+      );
       console.log(models);
     };
     func();
