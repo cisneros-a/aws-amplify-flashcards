@@ -1,9 +1,14 @@
 import "./App.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import StacksContainer from "./Components/StacksContainer";
+import CardDisplay from "./Components/CardDisplay";
 import { DataStore } from "@aws-amplify/datastore";
 import { User, Stacks } from "./models";
 
 function App() {
+  const [stacks, setStacks] = useState([]);
+  const [selectedStack, setSelectedStack] = useState(null);
+
   let addUser = async () => {
     const user = {
       username: window.prompt("username"),
@@ -28,19 +33,35 @@ function App() {
     console.log(newStack);
   };
 
+  let selectStack = (stack) => {
+    setSelectedStack(stack);
+  };
+
   useEffect(() => {
     const func = async () => {
-      const models = await DataStore.query(Stacks, (s) =>
-        s.userID("eq", "148ee1c0-b57b-4c37-8ae8-394982f6ef56")
+      const users = await DataStore.query(User, (user) =>
+        user.username("eq", "adrian")
       );
-      console.log(models);
+      const stacks = await DataStore.query(Stacks, (s) =>
+        s.userID("eq", users[0].id)
+      );
+      setStacks(stacks);
     };
     func();
   }, []);
+
   return (
     <div className="App">
-      <button onClick={() => addUser()}> Add User</button>
-      <button onClick={() => addStack()}> Add Stack</button>
+      {selectedStack ? (
+        <CardDisplay stack={selectedStack} selectStack={selectStack} />
+      ) : (
+        <div>
+          {" "}
+          {/* <button onClick={() => addUser()}> Add User</button> */}{" "}
+          <button onClick={() => addStack()}> Add Stack</button>
+          <StacksContainer stacks={stacks} selectStack={selectStack} />
+        </div>
+      )}
     </div>
   );
 }
