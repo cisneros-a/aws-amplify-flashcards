@@ -54,7 +54,7 @@ function App() {
   return (
     <div className="App">
       <div className="header">
-        <Button type="secondary" onClick={() => addUser()}>
+        <Button type="primary" onClick={() => addUser()}>
           {" "}
           Add User
         </Button>{" "}
