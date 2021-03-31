@@ -1,15 +1,35 @@
-.App {
+@import "~antd/dist/antd.css";
+
+/* .App {
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+} */
+
+.App {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  height: 100vh;
+}
+
+.header {
+  border: 1px solid black;
+  grid-area: 1 / 1 / 2 / 6;
+}
+.sidebar {
+  grid-area: 2 / 1 / 6 / 2;
+  border: 1px solid red;
+}
+.body {
+  border: 1px solid blue;
+  grid-area: 2 / 2 / 6 / 6;
 }
 
 .stacks-container {
-  border: 1px solid black;
-  width: 40vw;
-  height: 60vh;
-  margin-top: 10rem;
   display: flex;
   flex-direction: column;
 }
@@ -19,17 +39,29 @@ button {
 }
 
 .stack {
-  height: 5rem;
-  width: 9rem;
-  border: 1px solid black;
-  align-self: center;
+  width: 100%;
+  font-size: 2rem;
+  text-align: center;
   margin-bottom: 2rem;
   cursor: pointer;
 }
 
+.stack:hover {
+  background-color: aliceblue;
+}
+
 .card-container {
-  margin-top: 15rem;
-  width: 40vw;
-  height: 60vh;
-  border: 1px solid;
+  margin-top: 2rem;
+  margin-left: 2rem;
+  /* width: 40vw;
+  height: 60vh; */
+  /* border: 1px solid; */
+}
+
+.card {
+  margin-bottom: 2rem;
+}
+
+.card:hover {
+  box-shadow: 2px 1px 1px lightgrey;
 }
