@@ -4,6 +4,7 @@ import StacksContainer from "./Components/StacksContainer";
 import CardDisplay from "./Components/CardDisplay";
 import { DataStore } from "@aws-amplify/datastore";
 import { User, Stacks } from "./models";
+import { Button } from "antd";
 
 function App() {
   const [stacks, setStacks] = useState([]);
@@ -52,16 +53,24 @@ function App() {
 
   return (
     <div className="App">
-      {selectedStack ? (
-        <CardDisplay stack={selectedStack} selectStack={selectStack} />
-      ) : (
-        <div>
+      <div className="header">
+        <Button type="primary" onClick={() => addUser()}>
           {" "}
-          {/* <button onClick={() => addUser()}> Add User</button> */}{" "}
-          <button onClick={() => addStack()}> Add Stack</button>
-          <StacksContainer stacks={stacks} selectStack={selectStack} />
-        </div>
-      )}
+          Add User
+        </Button>{" "}
+      </div>
+      <div className="sidebar">
+        <StacksContainer stacks={stacks} selectStack={selectStack} />
+        <Button type="primary" onClick={() => addStack()}>
+          {" "}
+          +{" "}
+        </Button>{" "}
+      </div>
+      <div className="body">
+        {selectedStack && (
+          <CardDisplay stack={selectedStack} selectStack={selectStack} />
+        )}{" "}
+      </div>
     </div>
   );
 }

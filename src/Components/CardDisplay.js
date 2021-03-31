@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { DataStore } from "@aws-amplify/datastore";
 import { Cards } from "../models";
+import { Card } from "antd";
 
 export default function CardDisplay({ stack, selectStack }) {
   const [cards, setCards] = useState([]);
@@ -39,9 +40,14 @@ export default function CardDisplay({ stack, selectStack }) {
         <div> You currently have no cards!</div>
       ) : (
         cards.map((card) => (
-          <div key={card.id}>
-            Question: {card.question} Answer: {card.answer}
-          </div>
+          <Card
+            className="card"
+            key={card.id}
+            title={card.question}
+            style={{ width: 500, borderBottom: 10 }}
+          >
+            <p>{card.question}</p>
+          </Card>
         ))
       )}
       <button onClick={() => addCardToStack()}>Add a Card</button>
