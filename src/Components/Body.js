@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import CardContainer from "./CardContainer";
 import { DataStore } from "@aws-amplify/datastore";
 import { Cards } from "../models";
-import { Card } from "antd";
 
-export default function CardDisplay({ stack, selectStack }) {
+export default function Body({ selectedStack, selectStack }) {
   const [cards, setCards] = useState([]);
-  //   const [query, setQuery] = useState(stack.id);
+
   const addCardToStack = async () => {
     const card = {
-      stacksID: stack.id,
+      stacksID: selectedStack.id,
       question: window.prompt("question"),
       answer: window.prompt("answer"),
     };
@@ -24,33 +24,24 @@ export default function CardDisplay({ stack, selectStack }) {
   useEffect(() => {
     const func = async () => {
       const cards = await DataStore.query(Cards, (card) =>
-        card.stacksID("eq", stack.id)
+        card.stacksID("eq", selectedStack.id)
       );
-      console.log("fetched cards");
+      console.log("fetched cards", cards);
       setCards(cards);
     };
     func();
   }, []);
 
   return (
-    <div className="card-container">
+    <div className="body-container">
       <button onClick={() => selectStack(null)}> back </button>
-      <h2>{stack.title}</h2>
+      <h2>{selectedStack.title}</h2>
+
       {cards.length === 0 ? (
         <div> You currently have no cards!</div>
       ) : (
-        cards.map((card) => (
-          <Card
-            className="card"
-            key={card.id}
-            title={card.question}
-            style={{ width: 500, borderBottom: 10 }}
-          >
-            <p>{card.question}</p>
-          </Card>
-        ))
+        <CardContainer cards={cards} addCardToStack={addCardToStack} />
       )}
-      <button onClick={() => addCardToStack()}>Add a Card</button>
     </div>
   );
 }

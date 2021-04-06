@@ -1,7 +1,8 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import StacksContainer from "./Components/StacksContainer";
-import CardDisplay from "./Components/CardDisplay";
+import CardContainer from "./Components/CardContainer";
+import Body from "./Components/Body";
 import { DataStore } from "@aws-amplify/datastore";
 import { User, Stacks } from "./models";
 import { Button } from "antd";
@@ -59,6 +60,7 @@ function App() {
           Add User
         </Button>{" "}
       </div>
+
       <div className="sidebar">
         <StacksContainer stacks={stacks} selectStack={selectStack} />
         <Button type="primary" onClick={() => addStack()}>
@@ -66,10 +68,11 @@ function App() {
           +{" "}
         </Button>{" "}
       </div>
+
       <div className="body">
         {selectedStack && (
-          <CardDisplay stack={selectedStack} selectStack={selectStack} />
-        )}{" "}
+          <Body selectedStack={selectedStack} selectStack={selectStack} />
+        )}
       </div>
     </div>
   );
