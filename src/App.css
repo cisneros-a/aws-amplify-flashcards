@@ -27,6 +27,25 @@
 .body {
   border: 1px solid blue;
   grid-area: 2 / 2 / 6 / 6;
+  overflow-x: hidden;
+}
+
+.body-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.body-container > h2 {
+  text-transform: capitalize;
+  font-size: 3rem;
+  align-self: center;
+}
+
+.buttons-container {
+  margin: 1rem;
+  display: flex;
+  justify-content: space-between;
 }
 
 .stacks-container {
@@ -36,6 +55,7 @@
 
 button {
   width: 5rem;
+  height: 2rem;
 }
 
 .stack {
@@ -51,17 +71,39 @@ button {
 }
 
 .card-container {
-  margin-top: 2rem;
-  margin-left: 2rem;
-  /* width: 40vw;
-  height: 60vh; */
-  /* border: 1px solid; */
+  display: flex;
+  flex-direction: column;
 }
 
-.card {
+.card-container-card-type {
+  display: flex;
+  justify-content: space-around;
+}
+
+.card-section {
+  display: flex;
+  justify-content: space-around;
   margin-bottom: 2rem;
 }
 
-.card:hover {
-  box-shadow: 2px 1px 1px lightgrey;
+.box {
+  width: 10rem;
+  height: 10rem;
+  border: 1px solid black;
+}
+
+.card {
+  width: 25rem;
+  min-height: 10rem;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2), 0px 0px 30px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.card > p {
+  font-size: 1rem;
+  font-weight: 500;
 }
