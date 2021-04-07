@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
-import CardContainer from "./CardContainer";
+import CardsContainer from "./CardsContainer";
+import ReviewCardContainer from "./ReviewCardContainer";
 import { DataStore } from "@aws-amplify/datastore";
 import { Cards } from "../models";
+import { Button } from "antd";
+import { PlusSquareOutlined } from "@ant-design/icons";
 
 export default function Body({ selectedStack, selectStack }) {
   const [cards, setCards] = useState([]);
+  const [reviewMode, setReviewMode] = useState(false);
 
   const addCardToStack = async () => {
     const card = {
@@ -30,17 +34,30 @@ export default function Body({ selectedStack, selectStack }) {
       setCards(cards);
     };
     func();
-  }, []);
+  }, [selectedStack.id]);
 
   return (
     <div className="body-container">
-      <button onClick={() => selectStack(null)}> back </button>
       <h2>{selectedStack.title}</h2>
-
       {cards.length === 0 ? (
-        <div> You currently have no cards!</div>
+        <div>
+          You currently have no cards yet!
+          <Button size="large" type="primary" onClick={() => addCardToStack()}>
+            <PlusSquareOutlined /> Add
+          </Button>
+        </div>
       ) : (
-        <CardContainer cards={cards} addCardToStack={addCardToStack} />
+        <div>
+          {reviewMode ? (
+            <ReviewCardContainer cards={cards} setReviewMode={setReviewMode} />
+          ) : (
+            <CardsContainer
+              cards={cards}
+              setReviewMode={setReviewMode}
+              addCardToStack={addCardToStack}
+            />
+          )}
+        </div>
       )}
     </div>
   );

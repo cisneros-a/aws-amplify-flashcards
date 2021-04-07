@@ -1,7 +1,7 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import StacksContainer from "./Components/StacksContainer";
-import CardContainer from "./Components/CardContainer";
+import CardsContainer from "./Components/CardsContainer";
 import Body from "./Components/Body";
 import { DataStore } from "@aws-amplify/datastore";
 import { User, Stacks } from "./models";
@@ -27,7 +27,7 @@ function App() {
   let addStack = async () => {
     const stack = {
       title: window.prompt("title"),
-      userID: "7f0e7347-7026-4dba-8d05-69b3be2521cb",
+      userID: "148ee1c0-b57b-4c37-8ae8-394982f6ef56",
       Cards: [],
     };
     const newStack = await DataStore.save(new Stacks(stack));

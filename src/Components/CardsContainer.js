@@ -1,12 +1,12 @@
 import React from "react";
 import CardComponent from "./Card";
 import { Button } from "antd";
+import { PlusSquareOutlined } from "@ant-design/icons";
 
-export default function Body({ cards, addCardToStack }) {
-  //   const [query, setQuery] = useState(stack.id);
-
+export default function Body({ cards, setReviewMode, addCardToStack }) {
   return (
     <div className="card-container">
+      <button onClick={() => setReviewMode(true)}> Review </button>
       <div className="card-container-card-type">
         <p>Question</p>
         <p>Answer</p>
@@ -18,9 +18,8 @@ export default function Body({ cards, addCardToStack }) {
           <CardComponent description={card.answer} />
         </div>
       ))}
-
-      <Button type="secondary" onClick={() => addCardToStack()}>
-        ADD +
+      <Button size="large" type="primary" onClick={() => addCardToStack()}>
+        <PlusSquareOutlined /> Add
       </Button>
     </div>
   );
