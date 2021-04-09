@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import Card from "./Card";
+import LargeCard from "./LargeCard";
+import { Button } from "antd";
+import { DoubleLeftOutlined, DoubleRightOutlined } from "@ant-design/icons";
 
 function useToggle(initialValue = false) {
   console.log("toggle");
@@ -15,12 +17,22 @@ export default function ReviewCardContainer({ setReviewMode, cards }) {
   const [isOn, toggleIsOn] = useToggle();
 
   return (
-    <div onClick={toggleIsOn}>
+    <div className="review-card-container" onClick={toggleIsOn}>
       <button onClick={() => setReviewMode(false)}> Back </button>
-      <Card
+      <LargeCard
         // toggle={() => toggleIsOn}
-        description={isOn ? currentCard.question : currentCard.answer}
-      ></Card>
+        description={isOn ? currentCard.answer : currentCard.question}
+      ></LargeCard>
+      <div className="cycle-card-buttons">
+        <Button type="primary" danger>
+          <DoubleLeftOutlined />
+          Prev
+        </Button>
+        <Button type="primary" danger>
+          Next
+          <DoubleRightOutlined />
+        </Button>
+      </div>
     </div>
   );
 }
