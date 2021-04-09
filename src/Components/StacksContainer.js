@@ -1,4 +1,5 @@
 import React from "react";
+import { Divider } from "antd";
 
 export default function StacksContainer({ stacks, selectStack }) {
   return (
@@ -11,6 +12,7 @@ export default function StacksContainer({ stacks, selectStack }) {
           key={stack.id}
         >
           {stack.title}
+          <Divider />
         </div>
       ))}
     </div>

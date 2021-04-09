@@ -6,7 +6,7 @@ import { PlusSquareOutlined } from "@ant-design/icons";
 export default function Body({ cards, setReviewMode, addCardToStack }) {
   return (
     <div className="card-container">
-      <button onClick={() => setReviewMode(true)}> Review </button>
+      <button onClick={() => setReviewMode()}> Review </button>
       <div className="card-container-card-type">
         <p>Question</p>
         <p>Answer</p>

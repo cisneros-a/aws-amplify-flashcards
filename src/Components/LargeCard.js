@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function Card({ description }) {
+export default function LargeCard({ description }) {
   return (
     <div>
-      <div className="card">
+      <div className="large-card">
         <p>{description}</p>
       </div>
     </div>

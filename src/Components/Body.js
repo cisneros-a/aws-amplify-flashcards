@@ -25,6 +25,16 @@ export default function Body({ selectedStack, selectStack }) {
     }
   };
 
+  const reviewCards = async () => {
+    const res = await fetch(
+      "https://dsgz55uj8d.execute-api.us-west-2.amazonaws.com/randomize",
+      "this is a test string"
+    );
+    const data = await res.json();
+    console.log(data);
+    setReviewMode(true);
+  };
+
   useEffect(() => {
     const func = async () => {
       const cards = await DataStore.query(Cards, (card) =>
@@ -53,7 +63,7 @@ export default function Body({ selectedStack, selectStack }) {
           ) : (
             <CardsContainer
               cards={cards}
-              setReviewMode={setReviewMode}
+              setReviewMode={reviewCards}
               addCardToStack={addCardToStack}
             />
           )}
