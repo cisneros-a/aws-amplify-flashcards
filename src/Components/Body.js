@@ -26,12 +26,16 @@ export default function Body({ selectedStack, selectStack }) {
   };
 
   const reviewCards = async () => {
+    const arr = JSON.stringify(cards);
     const res = await fetch(
       "https://dsgz55uj8d.execute-api.us-west-2.amazonaws.com/randomize",
-      "this is a test string"
+      {
+        method: "POST",
+        body: arr,
+      }
     );
     const data = await res.json();
-    console.log(data);
+    setCards(data);
     setReviewMode(true);
   };
 
